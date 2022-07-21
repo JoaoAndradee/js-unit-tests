@@ -35,10 +35,28 @@ describe('6 - Implemente os casos de teste para a função `productDetails`', ()
     // Teste se productDetails é uma função.
     expect(typeof productDetails).toBe('function');
     // Teste se o retorno da função é um array.
-    expect(Array.isArray(productDetails()).toBe('true'));
+    expect(Array.isArray(productDetails())).toBeTruthy();
     // Teste se o array retornado pela função contém dois itens dentro.
+    // expect(productDetails().length).toBe(2);
     // Teste se os dois itens dentro do array retornado pela função são objetos.
+    const meuArray = productDetails().every((e) => {
+      if (typeof e === 'object' ) {
+        return e;
+      }
+    })
+    expect(meuArray).toBeTruthy();
     // Teste se quando passado parâmetros diferentes entre si, os dois objetos também são diferentes entre si.
+    expect(productDetails('caneta', 'lapis')[0] === productDetails()[1]).toBeFalsy();
     // Teste se os dois productIds terminam com 123.
+    function verificar123() {
+      if (productDetails('caneta', 'lapis')[0].details.productId.includes('123') && productDetails('tesoura', 'papel')[1].details.productId.includes('123')) {
+          return true;
+      }  
+        return false;
+    };
+     let contem123 = verificar123();
+
+     expect(contem123).toBeTruthy();
+
   });
 });
